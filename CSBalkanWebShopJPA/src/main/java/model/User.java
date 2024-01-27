@@ -20,8 +20,6 @@ public class User implements Serializable {
 
 	private String displayName;
 
-	private int idCart;
-
 	private String password;
 
 	private String username;
@@ -63,14 +61,6 @@ public class User implements Serializable {
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
-	}
-
-	public int getIdCart() {
-		return this.idCart;
-	}
-
-	public void setIdCart(int idCart) {
-		this.idCart = idCart;
 	}
 
 	public String getPassword() {

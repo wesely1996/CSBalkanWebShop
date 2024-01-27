@@ -48,27 +48,6 @@ th, td {
 		alt="Web Shop Logo" width="50" height="50">
 	<h1>CS Balkan Web Shop</h1>
 
-	<div id="loginForm">
-		<c:if test="${!empty errorMessage}">
-			<h4 style="color: red">${errorMessage}</h4>
-		</c:if>
-		<form:form action="/CSBalkanWebShop/user/logIn"
-			method="post" modelAttribute="user">
-			<table>
-				<tr>
-					<th><label for="username">Username:</label></th>
-					<th><input type="text" id="username" name="username" required></th>
-				</tr>
-				<tr>
-					<th><label for="password">Password:</label></th>
-					<th><input type="password" id="password" name="password" required></th>
-				</tr>
-			</table>
-			<input type="submit" value="Login">
-		</form:form>
-		<br>
-		<a id="registerLink" href="/CSBalkanWebShop/user/register">Don't have an account? Register here.</a>
-	</div>
 
 </body>
 </html>

@@ -13,7 +13,7 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-#loginForm {
+#registerForm {
 	margin-top: 20px;
 	display: flex;
 	justify-content: center;
@@ -32,7 +32,7 @@ table {
 	border-collapse: collapse;
 	width: 80%;
 	margin: 0 auto;
-	border:0px solid transparent;
+	border: 0px solid transparent;
 }
 
 th, td {
@@ -48,26 +48,29 @@ th, td {
 		alt="Web Shop Logo" width="50" height="50">
 	<h1>CS Balkan Web Shop</h1>
 
-	<div id="loginForm">
+	<div id="registerForm">
 		<c:if test="${!empty errorMessage}">
 			<h4 style="color: red">${errorMessage}</h4>
 		</c:if>
-		<form:form action="/CSBalkanWebShop/user/logIn"
+		<form:form action="/CSBalkanWebShop/user/registerNewUser"
 			method="post" modelAttribute="user">
 			<table>
 				<tr>
-					<th><label for="username">Username:</label></th>
+					<th><label for="username">*Username:</label></th>
 					<th><input type="text" id="username" name="username" required></th>
 				</tr>
 				<tr>
-					<th><label for="password">Password:</label></th>
+					<th><label for="password">*Password:</label></th>
 					<th><input type="password" id="password" name="password" required></th>
 				</tr>
+				<tr>
+					<th><label for="displayName">Display name:</label></th>
+					<th><input type="text" id="displayName" name="displayName"></th>
+				</tr>
 			</table>
-			<input type="submit" value="Login">
+			<input type="submit" value="Register">
 		</form:form>
-		<br>
-		<a id="registerLink" href="/CSBalkanWebShop/user/register">Don't have an account? Register here.</a>
+		<br> <a id="logInLink" href="/CSBalkanWebShop/">Already have an account? Log in here.</a>
 	</div>
 
 </body>

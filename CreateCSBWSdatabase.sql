@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `CSBalkanWebShop`.`Users` (
   `username` VARCHAR(256) NOT NULL,
   `password` VARCHAR(256) NOT NULL,
   `displayName` VARCHAR(256) NULL,
-  `idCart` INT NULL,
   PRIMARY KEY (`idUsers`),
   UNIQUE INDEX `idUsers_UNIQUE` (`idUsers` ASC) VISIBLE)
 ENGINE = InnoDB;

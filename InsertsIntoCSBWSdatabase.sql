@@ -1,7 +1,7 @@
-INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`, `idCart`) VALUES (1, 'nikola', 'nikola', 'Nikola', NULL);
-INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`, `idCart`) VALUES (2, 'aleksa', 'aleksa', 'Aleksa', NULL);
-INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`, `idCart`) VALUES (3, 'milos', 'milos', NULL, NULL);
-INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`, `idCart`) VALUES (4, 'ribar', 'Ribar22', 'Dzoni', NULL);
+INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`) VALUES (1, 'nikola', 'nikola', 'Nikola');
+INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`) VALUES (2, 'aleksa', 'aleksa', 'Aleksa');
+INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`) VALUES (3, 'milos', 'milos', NULL);
+INSERT INTO `CSBalkanWebShop`.`Users` (`idUsers`, `username`, `password`, `displayName`) VALUES (4, 'ribar', 'Ribar22', 'Dzoni');
 
 INSERT INTO `CSBalkanWebShop`.`FriendsList` (`idFriendsList`, `idUser`, `idFriend`) VALUES (1, 1, 2);
 INSERT INTO `CSBalkanWebShop`.`FriendsList` (`idFriendsList`, `idUser`, `idFriend`) VALUES (2, 2, 1);

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function NavBar({loggedIn, setLoggedIn, displayName}) {
+function NavBar({loggedIn, setLoggedIn, displayName, AmountOfCartItems}) {
 
     return (
         <div>
@@ -13,7 +13,7 @@ function NavBar({loggedIn, setLoggedIn, displayName}) {
                 loggedIn ? 
                     <div>
                         <a href='/profile'>{displayName}</a>
-                        <a href='/cart'>Cart (X)</a>
+                        <a href='/cart'>Cart ({AmountOfCartItems})</a>
                         <button  onClick={() => setLoggedIn(false)}>Logout</button>
                     </div>
                     :

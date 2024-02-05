@@ -1,6 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 /**
@@ -15,7 +18,7 @@ public class Shoppinglistitem implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idShoppingListItems;
+	private int id;
 
 	private double price;
 
@@ -24,22 +27,24 @@ public class Shoppinglistitem implements Serializable {
 	// bi-directional many-to-one association to Product
 	@ManyToOne
 	@JoinColumn(name = "idProducts")
+	@JsonBackReference
 	private Product product;
 
 	// bi-directional many-to-one association to Shoppinglist
 	@ManyToOne
 	@JoinColumn(name = "idShoppingList")
+	@JsonBackReference
 	private Shoppinglist shoppinglist;
 
 	public Shoppinglistitem() {
 	}
 
-	public int getIdShoppingListItems() {
-		return this.idShoppingListItems;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdShoppingListItems(int idShoppingListItems) {
-		this.idShoppingListItems = idShoppingListItems;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public double getPrice() {

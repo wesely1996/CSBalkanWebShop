@@ -6,33 +6,35 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 
+
 /**
- * The persistent class for the favoriteproducts database table.
+ * The persistent class for the cart database table.
  * 
  */
 @Entity
-@Table(name = "favoriteproducts")
-@NamedQuery(name = "Favoriteproduct.findAll", query = "SELECT f FROM Favoriteproduct f")
-public class Favoriteproduct implements Serializable {
+@NamedQuery(name="Cart.findAll", query="SELECT c FROM Cart c")
+public class Cart implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	// bi-directional many-to-one association to Product
+	private int amount;
+
+	//bi-directional many-to-one association to Product
 	@ManyToOne
-	@JoinColumn(name = "idProduct")
+	@JoinColumn(name="idProducts")
 	@JsonBackReference
 	private Product product;
 
-	// bi-directional many-to-one association to User
+	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name = "idUsers")
+	@JoinColumn(name="idUser")
 	@JsonBackReference
 	private User user;
 
-	public Favoriteproduct() {
+	public Cart() {
 	}
 
 	public int getId() {
@@ -41,6 +43,14 @@ public class Favoriteproduct implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getAmount() {
+		return this.amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 	public Product getProduct() {

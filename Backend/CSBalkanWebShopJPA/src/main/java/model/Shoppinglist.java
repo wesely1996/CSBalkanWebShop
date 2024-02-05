@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * The persistent class for the shoppinglists database table.
  * 
@@ -17,34 +20,31 @@ public class Shoppinglist implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idShoppingList;
+	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
 
 	// bi-directional many-to-one association to Shoppinglistitem
 	@OneToMany(mappedBy = "shoppinglist")
+	@JsonManagedReference
 	private List<Shoppinglistitem> shoppinglistitems;
-
-	// bi-directional many-to-one association to Adress
-	@ManyToOne
-	@JoinColumn(name = "shippingAddress")
-	private Adress adress;
 
 	// bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name = "idUsers")
+	@JsonBackReference
 	private User user;
 
 	public Shoppinglist() {
 	}
 
-	public int getIdShoppingList() {
-		return this.idShoppingList;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdShoppingList(int idShoppingList) {
-		this.idShoppingList = idShoppingList;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Date getTimestamp() {
@@ -75,14 +75,6 @@ public class Shoppinglist implements Serializable {
 		shoppinglistitem.setShoppinglist(null);
 
 		return shoppinglistitem;
-	}
-
-	public Adress getAdress() {
-		return this.adress;
-	}
-
-	public void setAdress(Adress adress) {
-		this.adress = adress;
 	}
 
 	public User getUser() {

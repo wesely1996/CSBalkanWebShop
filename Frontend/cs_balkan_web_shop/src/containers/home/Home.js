@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ProductCard from '../../components/productCard/ProductCard';
 import NavBar from '../../components/navbar/NavBar';
 
-function Home({data, loggedIn, setLoggedIn, displayName, AddToCart}) {
+function Home({data, loggedIn, setLoggedIn, displayName, AddToCart, AmountOfCartItems}) {
 
     const [selectedType, setSelectedType] = useState("");
 
@@ -12,7 +12,7 @@ function Home({data, loggedIn, setLoggedIn, displayName, AddToCart}) {
 
     return (
         <div>
-            <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} displayName={displayName}/>
+            <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} displayName={displayName} AmountOfCartItems={AmountOfCartItems}/>
             <label>
                 Search:
                 <input
@@ -31,7 +31,8 @@ function Home({data, loggedIn, setLoggedIn, displayName, AddToCart}) {
                 price={item.price} 
                 image={item.image}
                 description={item.description}
-                AddToCart={AddToCart}/>
+                AddToCart={AddToCart}
+                isLoggedIn={loggedIn}/>
             ))}
         </div>
     )

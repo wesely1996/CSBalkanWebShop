@@ -17,7 +17,7 @@ public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idProducts;
+	private int id;
 
 	private String description;
 
@@ -39,15 +39,19 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product")
 	private List<Shoppinglistitem> shoppinglistitems;
 
+	// bi-directional many-to-one association to Cart
+	@OneToMany(mappedBy = "product")
+	private List<Cart> carts;
+
 	public Product() {
 	}
 
-	public int getIdProducts() {
-		return this.idProducts;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdProducts(int idProducts) {
-		this.idProducts = idProducts;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDescription() {
@@ -140,6 +144,28 @@ public class Product implements Serializable {
 		shoppinglistitem.setProduct(null);
 
 		return shoppinglistitem;
+	}
+
+	public List<Cart> getCarts() {
+		return this.carts;
+	}
+
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public Cart addCart(Cart cart) {
+		getCarts().add(cart);
+		cart.setProduct(this);
+
+		return cart;
+	}
+
+	public Cart removeCart(Cart cart) {
+		getCarts().remove(cart);
+		cart.setProduct(null);
+
+		return cart;
 	}
 
 }

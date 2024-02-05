@@ -1,40 +1,46 @@
 package model;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 /**
- * The persistent class for the friendslist database table.
+ * The persistent class for the friends database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Friendslist.findAll", query = "SELECT f FROM Friendslist f")
-public class Friendslist implements Serializable {
+@Table(name = "friends")
+@NamedQuery(name = "Friend.findAll", query = "SELECT f FROM Friend f")
+public class Friend implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idFriendsList;
+	private int id;
 
 	// bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name = "idUser")
+	@JsonBackReference
 	private User user1;
 
 	// bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name = "idFriend")
+	@JsonBackReference
 	private User user2;
 
-	public Friendslist() {
+	public Friend() {
 	}
 
-	public int getIdFriendsList() {
-		return this.idFriendsList;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdFriendsList(int idFriendsList) {
-		this.idFriendsList = idFriendsList;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public User getUser1() {

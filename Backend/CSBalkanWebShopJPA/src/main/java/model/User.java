@@ -4,6 +4,9 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * The persistent class for the users database table.
  * 
@@ -16,65 +19,64 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUsers;
-
-	private String displayName;
+	private int id;
 
 	private String email;
 
 	private String password;
 
 	private String username;
-	
-	private String firstName;
-	
-	private String lastName;
-
-	// bi-directional many-to-one association to Adress
-	@OneToMany(mappedBy = "user")
-	private List<Adress> adresses;
 
 	// bi-directional many-to-one association to Favoriteproduct
 	@OneToMany(mappedBy = "user")
+	@JsonManagedReference
 	private List<Favoriteproduct> favoriteproducts;
-
-	// bi-directional many-to-one association to Friendslist
-	@OneToMany(mappedBy = "user1")
-	private List<Friendslist> friendslists1;
-
-	// bi-directional many-to-one association to Friendslist
-	@OneToMany(mappedBy = "user2")
-	private List<Friendslist> friendslists2;
-
-	// bi-directional many-to-one association to Message
-	@OneToMany(mappedBy = "user1")
-	private List<Message> messages1;
-
-	// bi-directional many-to-one association to Message
-	@OneToMany(mappedBy = "user2")
-	private List<Message> messages2;
 
 	// bi-directional many-to-one association to Shoppinglist
 	@OneToMany(mappedBy = "user")
+	@JsonManagedReference
 	private List<Shoppinglist> shoppinglists;
+
+	// bi-directional many-to-one association to Cart
+	@OneToMany(mappedBy = "user")
+	@JsonManagedReference
+	private List<Cart> carts;
+
+	// bi-directional many-to-one association to Friend
+	@OneToMany(mappedBy = "user1")
+	@JsonManagedReference
+	private List<Friend> friends1;
+
+	// bi-directional many-to-one association to Friend
+	@OneToMany(mappedBy = "user2")
+	@JsonManagedReference
+	private List<Friend> friends2;
+
+	// bi-directional many-to-one association to Inbox
+	@OneToMany(mappedBy = "user1")
+	@JsonManagedReference
+	private List<Inbox> inboxs1;
+
+	// bi-directional many-to-one association to Inbox
+	@OneToMany(mappedBy = "user2")
+	@JsonManagedReference
+	private List<Inbox> inboxs2;
+
+	// bi-directional many-to-one association to Role
+	@ManyToOne
+	@JoinColumn(name = "idRole")
+	@JsonBackReference
+	private Role role;
 
 	public User() {
 	}
 
-	public int getIdUsers() {
-		return this.idUsers;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdUsers(int idUsers) {
-		this.idUsers = idUsers;
-	}
-
-	public String getDisplayName() {
-		return this.displayName;
-	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -101,44 +103,6 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public List<Adress> getAdresses() {
-		return this.adresses;
-	}
-
-	public void setAdresses(List<Adress> adresses) {
-		this.adresses = adresses;
-	}
-
-	public Adress addAdress(Adress adress) {
-		getAdresses().add(adress);
-		adress.setUser(this);
-
-		return adress;
-	}
-
-	public Adress removeAdress(Adress adress) {
-		getAdresses().remove(adress);
-		adress.setUser(null);
-
-		return adress;
-	}
-
 	public List<Favoriteproduct> getFavoriteproducts() {
 		return this.favoriteproducts;
 	}
@@ -161,94 +125,6 @@ public class User implements Serializable {
 		return favoriteproduct;
 	}
 
-	public List<Friendslist> getFriendslists1() {
-		return this.friendslists1;
-	}
-
-	public void setFriendslists1(List<Friendslist> friendslists1) {
-		this.friendslists1 = friendslists1;
-	}
-
-	public Friendslist addFriendslists1(Friendslist friendslists1) {
-		getFriendslists1().add(friendslists1);
-		friendslists1.setUser1(this);
-
-		return friendslists1;
-	}
-
-	public Friendslist removeFriendslists1(Friendslist friendslists1) {
-		getFriendslists1().remove(friendslists1);
-		friendslists1.setUser1(null);
-
-		return friendslists1;
-	}
-
-	public List<Friendslist> getFriendslists2() {
-		return this.friendslists2;
-	}
-
-	public void setFriendslists2(List<Friendslist> friendslists2) {
-		this.friendslists2 = friendslists2;
-	}
-
-	public Friendslist addFriendslists2(Friendslist friendslists2) {
-		getFriendslists2().add(friendslists2);
-		friendslists2.setUser2(this);
-
-		return friendslists2;
-	}
-
-	public Friendslist removeFriendslists2(Friendslist friendslists2) {
-		getFriendslists2().remove(friendslists2);
-		friendslists2.setUser2(null);
-
-		return friendslists2;
-	}
-
-	public List<Message> getMessages1() {
-		return this.messages1;
-	}
-
-	public void setMessages1(List<Message> messages1) {
-		this.messages1 = messages1;
-	}
-
-	public Message addMessages1(Message messages1) {
-		getMessages1().add(messages1);
-		messages1.setUser1(this);
-
-		return messages1;
-	}
-
-	public Message removeMessages1(Message messages1) {
-		getMessages1().remove(messages1);
-		messages1.setUser1(null);
-
-		return messages1;
-	}
-
-	public List<Message> getMessages2() {
-		return this.messages2;
-	}
-
-	public void setMessages2(List<Message> messages2) {
-		this.messages2 = messages2;
-	}
-
-	public Message addMessages2(Message messages2) {
-		getMessages2().add(messages2);
-		messages2.setUser2(this);
-
-		return messages2;
-	}
-
-	public Message removeMessages2(Message messages2) {
-		getMessages2().remove(messages2);
-		messages2.setUser2(null);
-
-		return messages2;
-	}
-
 	public List<Shoppinglist> getShoppinglists() {
 		return this.shoppinglists;
 	}
@@ -269,6 +145,124 @@ public class User implements Serializable {
 		shoppinglist.setUser(null);
 
 		return shoppinglist;
+	}
+
+	public List<Cart> getCarts() {
+		return this.carts;
+	}
+
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public Cart addCart(Cart cart) {
+		getCarts().add(cart);
+		cart.setUser(this);
+
+		return cart;
+	}
+
+	public Cart removeCart(Cart cart) {
+		getCarts().remove(cart);
+		cart.setUser(null);
+
+		return cart;
+	}
+
+	public List<Friend> getFriends1() {
+		return this.friends1;
+	}
+
+	public void setFriends1(List<Friend> friends1) {
+		this.friends1 = friends1;
+	}
+
+	public Friend addFriends1(Friend friends1) {
+		getFriends1().add(friends1);
+		friends1.setUser1(this);
+
+		return friends1;
+	}
+
+	public Friend removeFriends1(Friend friends1) {
+		getFriends1().remove(friends1);
+		friends1.setUser1(null);
+
+		return friends1;
+	}
+
+	public List<Friend> getFriends2() {
+		return this.friends2;
+	}
+
+	public void setFriends2(List<Friend> friends2) {
+		this.friends2 = friends2;
+	}
+
+	public Friend addFriends2(Friend friends2) {
+		getFriends2().add(friends2);
+		friends2.setUser2(this);
+
+		return friends2;
+	}
+
+	public Friend removeFriends2(Friend friends2) {
+		getFriends2().remove(friends2);
+		friends2.setUser2(null);
+
+		return friends2;
+	}
+
+	public List<Inbox> getInboxs1() {
+		return this.inboxs1;
+	}
+
+	public void setInboxs1(List<Inbox> inboxs1) {
+		this.inboxs1 = inboxs1;
+	}
+
+	public Inbox addInboxs1(Inbox inboxs1) {
+		getInboxs1().add(inboxs1);
+		inboxs1.setUser1(this);
+
+		return inboxs1;
+	}
+
+	public Inbox removeInboxs1(Inbox inboxs1) {
+		getInboxs1().remove(inboxs1);
+		inboxs1.setUser1(null);
+
+		return inboxs1;
+	}
+
+	public List<Inbox> getInboxs2() {
+		return this.inboxs2;
+	}
+
+	public void setInboxs2(List<Inbox> inboxs2) {
+		this.inboxs2 = inboxs2;
+	}
+
+	public Inbox addInboxs2(Inbox inboxs2) {
+		getInboxs2().add(inboxs2);
+		inboxs2.setUser2(this);
+
+		return inboxs2;
+	}
+
+	public Inbox removeInboxs2(Inbox inboxs2) {
+		getInboxs2().remove(inboxs2);
+		inboxs2.setUser2(null);
+
+		return inboxs2;
+	}
+
+	public Role getRole() {
+		return this.role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

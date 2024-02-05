@@ -4,21 +4,20 @@ import java.io.Serializable;
 import jakarta.persistence.*;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
- * The persistent class for the messages database table.
+ * The persistent class for the inbox database table.
  * 
  */
 @Entity
-@Table(name = "messages")
-@NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m")
-public class Message implements Serializable {
+@NamedQuery(name = "Inbox.findAll", query = "SELECT i FROM Inbox i")
+public class Inbox implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idMessages;
-
-	private int idConversation;
+	private int id;
 
 	private String message;
 
@@ -30,30 +29,24 @@ public class Message implements Serializable {
 	// bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name = "idSender")
+	@JsonBackReference
 	private User user1;
 
 	// bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name = "idReciver")
+	@JsonBackReference
 	private User user2;
 
-	public Message() {
+	public Inbox() {
 	}
 
-	public int getIdMessages() {
-		return this.idMessages;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdMessages(int idMessages) {
-		this.idMessages = idMessages;
-	}
-
-	public int getIdConversation() {
-		return this.idConversation;
-	}
-
-	public void setIdConversation(int idConversation) {
-		this.idConversation = idConversation;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getMessage() {

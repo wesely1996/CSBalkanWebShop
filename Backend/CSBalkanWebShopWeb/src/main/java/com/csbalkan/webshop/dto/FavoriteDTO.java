@@ -1,19 +1,18 @@
 package com.csbalkan.webshop.dto;
 
-public class CartDTO {
+public class FavoriteDTO {
+
 	private String user;
 	private Integer product;
-	private Integer amount;
 	
-	public CartDTO(String user, Integer product, Integer amount) {
+	public FavoriteDTO() {
+		super();
+	}
+
+	public FavoriteDTO(String user, Integer product) {
 		super();
 		this.user = user;
 		this.product = product;
-		this.amount = amount;
-	}
-
-	public CartDTO() {
-		super();
 	}
 
 	public String getUser() {
@@ -31,12 +30,6 @@ public class CartDTO {
 	public void setProduct(Integer product) {
 		this.product = product;
 	}
-
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
+	
+	
 }

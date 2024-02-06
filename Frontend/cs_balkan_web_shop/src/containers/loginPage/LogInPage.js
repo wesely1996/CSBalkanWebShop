@@ -33,7 +33,7 @@ function LogInPage({setUser, setLoggedIn}) {
 
     return (
         <div>
-            <h2>RegisterPage</h2>
+            <h2>Log in Page</h2>
             <form onSubmit={createNewUser}>
                 <label>
                 Username:

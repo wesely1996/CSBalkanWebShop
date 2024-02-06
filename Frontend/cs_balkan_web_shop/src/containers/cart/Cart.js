@@ -1,35 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import ProductCard from '../../components/cartCard/CartCard';
-import axios from '../../api/AxiosConfig';
+import CartCard from '../../components/cartCard/CartCard';
+import './Cart.css';
 
-function Cart({user}) {
-
-    const [data, setData] = useState([]);
-
-    const getCartItems = async (user) => {
-        try{
-            const response = await axios.get('/shop/getUserCartItems?userName='+user);
-            setData(response.data);
-        }catch (error) {
-            console.log('Error getting cart items', error);
-        }
-    }
-
-    useEffect(()=>{
-        getCartItems(user);
-    }, []);
+function Cart({cart, RemoveFromCart, Buy}) {
 
     return (
         <div>
-            {data.map((item, index) => (
-                <ProductCard key={index} 
-                id={item.idProducts}
-                name={item.name}  
-                price={item.price} 
-                image={item.image}
-                description={item.description}
-                RemoveFromCart={RemoveFromCart}/>
-            ))}
+            <div id='cart-products-display'>
+                {cart.map((item, index) => (
+                    <CartCard key={index} 
+                    idProduct={item.id}
+                    name={item.name}  
+                    price={item.price}
+                    quantity={item.amount} 
+                    RemoveFromCart={RemoveFromCart}/>
+                ))}
+            </div>
+            <button onClick={()=>Buy()}>BUY</button>
         </div>
     )
 }

@@ -13,4 +13,7 @@ public interface FavoriteProductRepository extends JpaRepository<Favoriteproduct
 	@Query("select fp from Favoriteproduct fp where fp.user.username=:user")
 	public List<Favoriteproduct> findByUsername(@Param("user") String username);
 
+	@Query("select fp from Favoriteproduct fp where fp.user.username=:user and fp.product.id=:pid")
+	public Favoriteproduct findByUsernameProduct(@Param("user") String user,@Param("pid") Integer product);
+
 }

@@ -10,19 +10,15 @@ function RegisterPage() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [displayName, setDisplayName] = useState("")
+    const [role, setRole] = useState("USER")
 
     const createNewUser = (event) => {
         event.preventDefault();
         const data = {
             username: username.trim(), 
             email: email.toLowerCase().trim(),  
-            password: password,  
-            firstName: firstName.trim(),  
-            lastName: lastName.trim(),
-            displayName: displayName.trim()
+            password: password,
+            role: role
         }
         try{
             axios.post('/auth/registerUser', data)
@@ -49,36 +45,6 @@ function RegisterPage() {
                     name="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                />
-                </label>
-                <br />
-                <label>
-                First Name:
-                <input
-                    type="text"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-                </label>
-                <br />
-                <label>
-                Last Name:
-                <input
-                    type="text"
-                    name="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-                </label>
-                <br />
-                <label>
-                Display Name:
-                <input
-                    type="text"
-                    name="displayName"
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
                 />
                 </label>
                 <br />

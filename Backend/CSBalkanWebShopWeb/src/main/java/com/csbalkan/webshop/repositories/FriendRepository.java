@@ -14,7 +14,6 @@ public interface FriendRepository extends JpaRepository<Friend, Integer>{
 	@Query("select f from Friend f where f.user1.username=:user")
 	public List<Friend> findFriendsForUser(@Param("user") String username);
 	
-	@Modifying
-	@Query("delete from Friend f where f.user1.username=:user and f.user2.username=:friend")
-	public void deleteFriendsByIds(@Param("user") String username, @Param("friend") String friend);
+	@Query("select f from Friend f where f.user1.username=:user and f.user2.username=:friend")
+	public Friend findFriendsByUsernames(@Param("user")String username, @Param("friend") String friend);
 }

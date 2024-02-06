@@ -55,7 +55,7 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@DeleteMapping("/user/removeFriend")
+	@PostMapping("/user/removeFriend")
 	public ResponseEntity<?> removeFriend(@RequestBody FriendDTO friends){
 		us.deleteFriend(friends);
 		return ResponseEntity.ok(null);

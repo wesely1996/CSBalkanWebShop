@@ -1,5 +1,6 @@
 package com.csbalkan.webshop.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.csbalkan.webshop.dto.FriendDTO;
 import com.csbalkan.webshop.dto.LogInDTO;
+import com.csbalkan.webshop.dto.StringDTO;
 import com.csbalkan.webshop.dto.UserDTO;
 import com.csbalkan.webshop.repositories.FriendRepository;
 import com.csbalkan.webshop.repositories.ProductReposiotry;
@@ -77,6 +79,8 @@ public class UserService {
 		User friend = ur.findByUsername(friends.getFriend());
 		if(friend == null)
 			return ResponseEntity.badRequest().body("User " + friends.getFriend() + " doesn't exist;");
+		if(fr.findFriendsByUsernames(friends.getUsername(), friends.getFriend()) != null)
+			return ResponseEntity.ok().body("Users are already friends");
 		Friend f = new Friend();
 		f.setUser1(user);
 		f.setUser2(friend);
@@ -87,10 +91,22 @@ public class UserService {
 	}
 	
 	public ResponseEntity<?> getFriends(String username){
-		return ResponseEntity.ok(fr.findFriendsForUser(username));
+		if(ur.findByUsername(username) == null)
+			return ResponseEntity.badRequest().body("User doesn't exit.");
+		List<Friend> friends = fr.findFriendsForUser(username);
+		List<StringDTO> freindsNames = new ArrayList<StringDTO>();
+		for(Friend f: friends) {
+			StringDTO newf = new StringDTO();
+			newf.setValue(f.getUser2().getUsername());
+			freindsNames.add(newf);
+		}
+		return ResponseEntity.ok(freindsNames);
 	}
 	
 	public void deleteFriend(FriendDTO firends){
-		fr.deleteFriendsByIds(firends.getUsername(), firends.getFriend());
+		Friend f = fr.findFriendsByUsernames(firends.getUsername(), firends.getFriend());
+		if(f != null) {
+			fr.deleteById(f.getId());
+		}
 	}
 }

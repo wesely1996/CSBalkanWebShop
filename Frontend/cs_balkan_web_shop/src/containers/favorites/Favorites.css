@@ -1,0 +1,11 @@
+.favorites-display{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 90%;
+    height: 80%;
+    margin: auto;
+    gap: 10px;
+}

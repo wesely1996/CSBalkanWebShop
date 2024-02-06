@@ -1,0 +1,18 @@
+.cart-card{
+    background-color: rgba(226, 226, 226, 0.404);
+    border: 2px solid #807f7f8c;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 20px;
+    min-height: 100px;
+    min-width: 150px;
+    max-width: 15%;
+}
+
+.cart-title{
+    font-size: 24px;
+}
+
+input{
+    width: 100px;
+}

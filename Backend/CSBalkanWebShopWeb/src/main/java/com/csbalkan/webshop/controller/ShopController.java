@@ -30,7 +30,7 @@ public class ShopController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/addFavorite")
-	public ResponseEntity<?> getUserFavList(@RequestBody FavoriteDTO fav){
+	public ResponseEntity<?> addToUserFavList(@RequestBody FavoriteDTO fav){
 		return ps.addFavoriteProduct(fav);
 	}
 	
@@ -59,14 +59,20 @@ public class ShopController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/removeFromFavorites")
+	public ResponseEntity<?> removeFromFav(@RequestBody CartDTO cartItem){
+		return ResponseEntity.ok(ps.removeFromFav(cartItem));
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/buy")
 	public ResponseEntity<?> buy(@RequestBody StringDTO user){
 		return ps.buy(user.getValue());
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/shoppingHistory")
-	public ResponseEntity<?> history(@RequestBody StringDTO user){
-		return ps.history(user.getValue());
+	@GetMapping("/shoppingHistory/{user}")
+	public ResponseEntity<?> history(@PathVariable String user){
+		return ps.history(user);
 	}
 }

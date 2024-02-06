@@ -5,7 +5,7 @@ import Profile from '../profile/Profile';
 import Cart from '../cart/Cart';
 import './Home.css';
 
-function Home({products, loggedIn, setLoggedIn, username, AddToCart, appState, setAppState, cart, RemoveFromCart, Buy}) {
+function Home({products, loggedIn, setLoggedIn, username, AddToCart, appState, setAppState, cart, RemoveFromCart, Buy, myrole, getProducts}) {
 
     return (
         <div>
@@ -18,7 +18,7 @@ function Home({products, loggedIn, setLoggedIn, username, AddToCart, appState, s
                 <Cart cart={cart} RemoveFromCart={RemoveFromCart} Buy={Buy}/>
                 :
                 appState === "PROFILE" ?
-                <Profile username={username}/>
+                <Profile username={username} myrole={myrole} getProducts={getProducts}/>
                 :
                 <div></div>
             }

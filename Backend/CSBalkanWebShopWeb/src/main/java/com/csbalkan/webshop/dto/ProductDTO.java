@@ -15,6 +15,8 @@ public class ProductDTO {
 	private BigDecimal price;
 
 	private String type;
+	
+	private int quantity;
 
 	public int getIdProducts() {
 		return idProducts;
@@ -62,6 +64,14 @@ public class ProductDTO {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

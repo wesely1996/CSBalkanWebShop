@@ -3,12 +3,13 @@ import History from "../history/History";
 import Favorites from  "../favorites/Favorites";
 import Freinds from "../friends/Friends";
 import Messages from '../messages/Messages';
+import Creator from '../creator/Creator';
 import axios from '../../api/AxiosConfig';
 import './Profile.css';
 
-function Profile({username}) {
+function Profile({username, myrole, getProducts}) {
 
-    const [profileState, SetProfileState] = useState("NONE"); // NONE | HISTORY | FRIENDS | MESSAGES | FAVORITES
+    const [profileState, SetProfileState] = useState("NONE"); // NONE | HISTORY | FRIENDS | MESSAGES | FAVORITES | CREATOR
     const [data, setData] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const [myfriends, setMyFriends] = useState([]);
@@ -75,10 +76,15 @@ function Profile({username}) {
     return (
         <div>
             <div>
-                <button  onClick={() => SetProfileState("FRIENDS")} className="btn btn-primary">Friends</button>
-                <button  onClick={() => SetProfileState("FAVORITES")} className="btn btn-primary">Favorites</button>
-                <button  onClick={() => SetProfileState("HISTORY")} className="btn btn-primary">History</button>
-                <button  onClick={() => SetProfileState("MESSAGES")} className="btn btn-primary">Messages</button>
+                <button onClick={() => SetProfileState("FRIENDS")} className="btn btn-primary">Friends</button>
+                <button onClick={() => SetProfileState("FAVORITES")} className="btn btn-primary">Favorites</button>
+                <button onClick={() => SetProfileState("HISTORY")} className="btn btn-primary">History</button>
+                <button onClick={() => SetProfileState("MESSAGES")} className="btn btn-primary">Messages</button>
+                {
+                    myrole==="ADMIN"?
+                    <button onClick={() => SetProfileState("CREATOR")} className="btn btn-primary">Creator</button>:
+                    <div></div>
+                }
             </div>
             <div className='profile-display'>
                 {   
@@ -92,6 +98,8 @@ function Profile({username}) {
                 <Freinds username={username} myfriends={myfriends} getFriends={getFriends} getMessages={getMessages}/>:
                 profileState==="MESSAGES"?
                 <Messages username={username} mymessages={mymessages}/>:
+                profileState==="CREATOR"?
+                <Creator getProducts={getProducts}/>:
                 <div>UNDER CONSTRUCTION</div>
                 }
             </div>

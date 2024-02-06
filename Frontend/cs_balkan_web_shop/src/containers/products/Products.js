@@ -53,6 +53,7 @@ function Products({data, loggedIn, AddToCart, username}) {
                     price={item.price} 
                     image={item.image}
                     description={item.description}
+                    quantity={item.quantity}
                     AddToCart={AddToCart}
                     loggedIn={loggedIn}
                     AddToFav={AddToFav}/>

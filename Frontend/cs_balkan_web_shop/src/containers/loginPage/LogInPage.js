@@ -19,7 +19,7 @@ function LogInPage({setUser, setLoggedIn}) {
             axios.post('/auth/logInUser', data)
             .then((res) => {
                 if(res.status === 200){
-                    setUser(data);
+                    setUser(res.data);
                     setLoggedIn(true);
                     navigate('/');
                 }

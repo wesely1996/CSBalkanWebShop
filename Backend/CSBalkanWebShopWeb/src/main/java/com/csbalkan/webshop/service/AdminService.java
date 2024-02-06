@@ -35,11 +35,9 @@ public class AdminService {
 		if(pr.findByName(name).isEmpty())
 			return ResponseEntity.badRequest().body("Product doesn't exists.");
 		Product p = pr.findByName(name).get();
-		p.setQuantity(p.getQuantity() + amount);
-		Product newP = pr.save(p);
-		if(newP.getQuantity() == p.getQuantity())
-			return ResponseEntity.ok("Product doesn't exists.");
-		return ResponseEntity.badRequest().body("Failed to change the amount of product.");
+		p.setQuantity(amount);
+		pr.save(p);
+		return ResponseEntity.ok("Product amount has changed");
 	}
 	
 	public ResponseEntity<?> deleteProduct(String name){

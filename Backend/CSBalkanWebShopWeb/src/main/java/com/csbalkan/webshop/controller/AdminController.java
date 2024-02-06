@@ -27,7 +27,7 @@ public class AdminController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@DeleteMapping("/removeProduct")
+	@PostMapping("/removeProduct")
 	public ResponseEntity<?> removeProduct(@RequestBody StringDTO product){
 		return as.deleteProduct(product.getValue());
 	}

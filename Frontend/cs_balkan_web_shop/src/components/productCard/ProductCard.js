@@ -3,7 +3,7 @@ import './ProductCard.css';
 
 function ProductCard(props) {
 
-    const {id, name, description, price, image, AddToCart, loggedIn, AddToFav} = props;
+    const {id, name, description, price, image, quantity, AddToCart, loggedIn, AddToFav} = props;
     const [amount, setAmount] = useState(0);
 
     return (
@@ -19,11 +19,16 @@ function ProductCard(props) {
             <span>${price.toFixed(2)}</span>
             {
                 loggedIn ?
-                    <div>
-                        <input  type="number" value={amount} onChange={e => setAmount(Number(e.target.value))}/>
-                        <button onClick={() => AddToCart(id, amount)}>Add to Cart</button>
-                        <button onClick={() => AddToFav(id)}>Add to Favorites</button>
-                    </div>
+                    quantity > 0?
+                        <div>
+                            <input  type="number" value={amount} onChange={e => setAmount(Number(e.target.value))}/>
+                            <button onClick={() => AddToCart(id, amount)}>Add to Cart</button>
+                            <button onClick={() => AddToFav(id)}>Add to Favorites</button>
+                        </div>:
+                        <div>
+                            SOLD OUT
+                            <button onClick={() => AddToFav(id)}>Add to Favorites</button>
+                        </div>
                 : <div></div>
             }
         </div>

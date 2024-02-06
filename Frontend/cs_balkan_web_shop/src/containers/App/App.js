@@ -114,6 +114,7 @@ function App() {
             if(res.ok){
                 console.log(res.json());
                 getCartItems();
+                getProducts();
                 setAppState("HOME");
             }else{
                 return Promise.reject(res.status)
@@ -127,7 +128,7 @@ function App() {
                 <Route path="/" element={<Home products={products} loggedIn={loggedIn} setLoggedIn={setLoggedIn} 
                                       username={mainuser.username} AddToCart={AddToCart} 
                                       appState={appState} setAppState={setAppState} cart={cart} RemoveFromCart={RemoveFromCart}
-                                      Buy={Buy}/>} />
+                                      Buy={Buy} myrole={mainuser.role} getProducts={getProducts}/>} />
                 <Route path="/login" element={<LogInPage setUser={setUser} setLoggedIn={setLoggedIn}/>} />
                 <Route path="/register" element={<RegisterPage />} />
             </Routes>
